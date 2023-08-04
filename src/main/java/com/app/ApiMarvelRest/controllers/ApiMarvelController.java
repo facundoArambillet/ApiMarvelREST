@@ -38,21 +38,35 @@ public class ApiMarvelController {
             return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getAll(), HttpStatus.NOT_FOUND);
         }
     }
+    //Endpoint usando PathVariable
+//    @GetMapping("/limit/{limit}/{pageNumber}")
+//    public ResponseEntity<List<MarvelCharacter>> getByLimit(@PathVariable int limit, @PathVariable int pageNumber) {
+//        int offset = (pageNumber - 1) * limit;
+//        if(apiMarvelService.getByLimit(limit,offset) != null) {
+//            LocalDateTime time = LocalDateTime.now();
+//            RequestTime marvelApiRequestTime = new RequestTime(time);
+//            marvelApiRequestTimeService.createRequestTime(marvelApiRequestTime);
+//            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,offset), HttpStatus.OK);
+//        }
+//        else {
+//            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,offset), HttpStatus.NOT_FOUND);
+//        }
+//    }
 
+    //Endpoint usando RequestParam(Dejo este porque es la primera vez que uso este decorador)
     @GetMapping("/limit")
-    public ResponseEntity<List<MarvelCharacter>> getByLimit(int limit, int pageNumber) {
+    public ResponseEntity<List<MarvelCharacter>> getByLimit(@RequestParam int limit, @RequestParam int pageNumber) {
         int offset = (pageNumber - 1) * limit;
-        if(apiMarvelService.getByLimit(limit,pageNumber) != null) {
+        if(apiMarvelService.getByLimit(limit,offset) != null) {
             LocalDateTime time = LocalDateTime.now();
             RequestTime marvelApiRequestTime = new RequestTime(time);
             marvelApiRequestTimeService.createRequestTime(marvelApiRequestTime);
-            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,pageNumber), HttpStatus.OK);
+            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,offset), HttpStatus.OK);
         }
         else {
-            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,pageNumber), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getByLimit(limit,offset), HttpStatus.NOT_FOUND);
         }
     }
-
 
     @GetMapping("/{characterId}")
     public ResponseEntity<MarvelCharacter> getById(@PathVariable("characterId") int id) {
