@@ -21,7 +21,7 @@ public class ApiMarvelController {
     //Si le pongo @Autowired me sale un error de un @Bean
     @Autowired
     private AuthService authService;
-    @Autowired()
+    @Autowired
     private ApiMarvelService apiMarvelService;
     @Autowired
     private ApiMarvelRequestTimeService marvelApiRequestTimeService;
@@ -38,7 +38,8 @@ public class ApiMarvelController {
             return new ResponseEntity<List<MarvelCharacter>>(apiMarvelService.getAll(), HttpStatus.NOT_FOUND);
         }
     }
-    //Endpoint usando PathVariable
+
+    //Endpoint usando @PathVariable
 //    @GetMapping("/limit/{limit}/{pageNumber}")
 //    public ResponseEntity<List<MarvelCharacter>> getByLimit(@PathVariable int limit, @PathVariable int pageNumber) {
 //        int offset = (pageNumber - 1) * limit;
@@ -53,7 +54,7 @@ public class ApiMarvelController {
 //        }
 //    }
 
-    //Endpoint usando RequestParam(Dejo este porque es la primera vez que uso este decorador)
+    //Endpoint usando @RequestParam(Dejo este porque es la primera vez que uso este decorador)
     @GetMapping("/limit")
     public ResponseEntity<List<MarvelCharacter>> getByLimit(@RequestParam int limit, @RequestParam int pageNumber) {
         int offset = (pageNumber - 1) * limit;

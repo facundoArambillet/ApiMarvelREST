@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import java.time.LocalDateTime;
-
 @Entity
 @Data
 public class RequestTime {
@@ -16,8 +15,9 @@ public class RequestTime {
     private LocalDateTime time;
 
     public RequestTime() {}
+
     public RequestTime(LocalDateTime time) {
-        this.id = id;
         this.time = time;
     }
+
 }

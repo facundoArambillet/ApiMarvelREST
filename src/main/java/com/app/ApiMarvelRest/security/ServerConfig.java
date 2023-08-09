@@ -50,7 +50,9 @@ public class ServerConfig implements WebMvcConfigurer {
                         .anyRequest().authenticated()
                 )
                 //Esta deprecated buscar como reemplazarlo(Si lo saco me da forbidden)
-                .csrf().disable()
+                //.csrf().disable()
+                //Asi se utiliza ahora
+                .csrf(csrf -> csrf.disable())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
